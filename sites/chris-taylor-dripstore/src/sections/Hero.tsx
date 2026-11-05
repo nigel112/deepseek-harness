@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { gsap, ScrollTrigger, SplitText, prefersReducedMotion } from '../lib/gsap'
 import { scrollToId } from '../lib/scroll'
+import { SceneBoundary } from '../components/SceneBoundary'
 import { DROP } from '../data/site'
 
 const LiquidScene = lazy(() => import('../components/LiquidScene'))
@@ -80,9 +81,11 @@ export function Hero({ ready }: { ready: boolean }) {
       </div>
 
       <div ref={sceneRef} className="hero__scene" aria-hidden="true">
-        <Suspense fallback={null}>
-          <LiquidScene active={sceneActive} />
-        </Suspense>
+        <SceneBoundary>
+          <Suspense fallback={null}>
+            <LiquidScene active={sceneActive} />
+          </Suspense>
+        </SceneBoundary>
       </div>
 
       <div className="hero__content shell">

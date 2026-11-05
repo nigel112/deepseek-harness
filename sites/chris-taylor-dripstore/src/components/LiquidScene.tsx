@@ -24,8 +24,8 @@ function ChromeDrop() {
     const t = state.clock.elapsedTime
     if (group.current) {
       group.current.rotation.y += delta * 0.14
-      group.current.position.x = THREE.MathUtils.damp(group.current.position.x, 0.72 + pointer.x * 0.42, 2.4, delta)
-      group.current.position.y = THREE.MathUtils.damp(group.current.position.y, -0.12 + pointer.y * 0.3, 2.4, delta)
+      group.current.position.x = THREE.MathUtils.damp(group.current.position.x, 1.05 + pointer.x * 0.42, 2.4, delta)
+      group.current.position.y = THREE.MathUtils.damp(group.current.position.y, -0.16 + pointer.y * 0.3, 2.4, delta)
       group.current.rotation.z = Math.sin(t * 0.24) * 0.09
     }
     if (drop.current) {
@@ -34,7 +34,7 @@ function ChromeDrop() {
   })
 
   return (
-    <group ref={group}>
+    <group ref={group} scale={0.82}>
       {/* the liquid chrome pour */}
       <Float speed={1.1} rotationIntensity={0.25} floatIntensity={0.7}>
         <mesh ref={drop} scale={1.42}>
@@ -111,7 +111,7 @@ export default function LiquidScene({ active = true }: { active?: boolean }) {
   return (
     <Canvas
       dpr={[1, 1.75]}
-      camera={{ position: [0, 0, 6.4], fov: 34 }}
+      camera={{ position: [0, 0, 7.2], fov: 34 }}
       gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
       frameloop={active ? 'always' : 'never'}
       onCreated={({ gl }) => {
