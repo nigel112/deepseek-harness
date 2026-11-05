@@ -549,8 +549,8 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 52px;
-  height: 9px;
+  top: 34px;
+  height: 8px;
   z-index: 3;
   background: linear-gradient(180deg, #4b4b4d 0%, #1a1a1c 46%, #050505 100%);
   box-shadow: 0 4px 10px rgba(11, 11, 12, 0.28);
@@ -595,8 +595,10 @@
 .rack__track {
   display: flex;
   align-items: flex-start;
-  gap: clamp(18px, 2.2vw, 42px);
-  padding: 0 var(--shell);
+  gap: clamp(14px, 1.9vw, 34px);
+  padding: 20px var(--shell) 0;
+  perspective: 1600px;
+  perspective-origin: 50% 26%;
   will-change: transform;
   height: 100%;
 }
@@ -612,67 +614,75 @@
 .rack-item {
   position: relative;
   flex: 0 0 auto;
-  width: clamp(228px, 23.5vw, 348px);
-  padding-top: 142px;
+  width: clamp(196px, 19.5vw, 280px);
   display: flex;
   flex-direction: column;
   transition: opacity 0.5s ease, filter 0.5s ease;
 }
 
 .rack-item.is-muted {
-  opacity: 0.18;
+  opacity: 0.16;
   filter: grayscale(1) contrast(0.9);
   pointer-events: none;
 }
 
+.rack-item__turn {
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
 .rack-item__hanger {
-  position: absolute;
-  top: 44px;
-  left: 50%;
-  width: 58px;
-  height: 104px;
-  transform: translateX(-50%);
-  color: rgba(11, 11, 12, 0.5);
-  z-index: 4;
+  position: relative;
+  height: 66px;
+  width: 100%;
+  color: rgba(11, 11, 12, 0.36);
+  z-index: 2;
   pointer-events: none;
 }
 
 .rack-item__hanger svg {
+  display: block;
   width: 100%;
   height: 100%;
+  overflow: visible;
 }
 
+/* the garment hangs straight off the hanger bar */
 .rack-item__frame {
   position: relative;
   display: block;
   width: 100%;
-  aspect-ratio: 3 / 2;
+  height: clamp(196px, 36vh, 356px);
+  margin: -2px 0 0;
   padding: 0;
-  overflow: hidden;
-  background: var(--paper);
-  border: 1px solid rgba(11, 11, 12, 0.09);
-  box-shadow: 0 20px 44px -34px rgba(11, 11, 12, 0.65);
-  transition: box-shadow 0.6s var(--ease-out);
-}
-
-.rack-item:hover .rack-item__frame {
-  box-shadow: 0 30px 60px -34px rgba(11, 11, 12, 0.55);
+  border: 0;
+  background: none;
+  cursor: pointer;
 }
 
 .rack-item__frame img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center top;
+  filter: drop-shadow(0 14px 18px rgba(11, 11, 12, 0.16));
+  transition: filter 0.5s var(--ease-out);
   will-change: transform;
+}
+
+.rack-item:hover .rack-item__frame img {
+  filter: drop-shadow(0 26px 30px rgba(11, 11, 12, 0.26));
 }
 
 .rack-item__quick {
   position: absolute;
-  inset: auto 0 0 0;
+  inset: auto 0 6% 0;
   display: flex;
   justify-content: center;
   padding: 12px;
   pointer-events: none;
+  z-index: 3;
 }
 
 .rack-item__quick span {
@@ -1713,15 +1723,22 @@
   .rack__track {
     height: auto;
     align-items: stretch;
-    padding-block: 0 18px;
+    padding-block: 18px 22px;
     transform: none !important;
     width: max-content;
   }
 
   .rack-item {
-    width: min(72vw, 330px);
+    width: min(70vw, 320px);
     scroll-snap-align: center;
-    padding-top: 132px;
+  }
+
+  .rack-item__hanger {
+    height: 58px;
+  }
+
+  .rack-item__frame {
+    height: min(74vw, 340px);
   }
 
   .rack__end {
@@ -1731,7 +1748,7 @@
   }
 
   .rack__rail {
-    top: 40px;
+    top: 30px;
   }
 
   .rack__rail-label {

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useCart } from '../lib/cart'
+import { useCart } from '../core/cart'
 import { DROP } from '../data/site'
 
 export function CartDrawer() {

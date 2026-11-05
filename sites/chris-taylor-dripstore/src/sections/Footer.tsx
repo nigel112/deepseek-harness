@@ -1,8 +1,8 @@
 import { useRef } from 'react'
 import { STORE } from '../data/site'
 import { LiquidWordmark } from '../components/LiquidFilters'
-import { useScrollReveal } from '../lib/reveal'
-import { scrollToId } from '../lib/scroll'
+import { useScrollReveal } from '../core/reveal'
+import { scrollToId } from '../core/scroll'
 
 export function Footer() {
   const title = useRef<HTMLHeadingElement>(null)

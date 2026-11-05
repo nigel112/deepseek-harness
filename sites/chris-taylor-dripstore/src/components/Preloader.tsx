@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { gsap, prefersReducedMotion } from '../lib/gsap'
+import { gsap, prefersReducedMotion } from '../core/gsap'
 
 const WORDS = ['Chris', 'Taylor', 'Dripstore']
 

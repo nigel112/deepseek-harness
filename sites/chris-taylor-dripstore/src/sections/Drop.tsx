@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { Countdown } from '../components/Countdown'
 import { DROP } from '../data/site'
-import { useScrollReveal } from '../lib/reveal'
+import { useScrollReveal } from '../core/reveal'
 
 const RULES = [
   'Forty-eight pieces across seven styles.',

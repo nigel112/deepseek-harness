@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { gsap, prefersReducedMotion } from '../lib/gsap'
+import { gsap, prefersReducedMotion } from '../core/gsap'
 
 /** Blend-mode cursor with a magnetic ring and per-target labels. */
 export function Cursor() {

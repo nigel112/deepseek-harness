@@ -16,7 +16,7 @@ npm run build   # type-check + production bundle
 | --- | --- |
 | Preloader | 0 → 100 counter, wordmark mask, five-panel curtain lift |
 | Hero | WebGL liquid-chrome pour behind outline display type, rotating chrome badge |
-| The rack | Horizontally pinned rail (GSAP ScrollTrigger) with garment hangers, filters, add-to-bag |
+| The rack | Horizontally pinned rail (GSAP ScrollTrigger); every piece hangs at an angle and turns to face you on hover, filters, add-to-bag |
 | Lookbook | Mannequin plates revealed with clip-path wipes and scroll drift — no faces, no filters |
 | Material study | Cursor-driven liquid-glass lens with `backdrop-filter` refraction + chrome spec cards |
 | The drop | Live countdown to the next rail re-up, liquid-glass signup |
@@ -34,9 +34,15 @@ npm run build   # type-check + production bundle
 
 ## Notes
 
-- **Imagery.** The product and mannequin photography was generated for this build; nothing is
-  scraped. Human models were deliberately replaced with faceless mannequins, per the brief, and
-  every garment hangs on a wooden hanger. The footer carries a short disclaimer.
+- **Rack imagery.** The seven pieces on the rail are cut straight out of the shop's own
+  Instagram posts (`public/img/rack/*.webp`, alpha, ~280K total). The watermark pill burned into
+  each screenshot was removed before matting. Garment names and brands follow what is legible in
+  those posts; **prices are placeholders** until the shop confirms them.
+- **One stand-in.** The denim short (CT—007) is still a generated plate — no clean pair of shorts
+  could be isolated from the screenshots. Swap `public/img/rack/shorts-denim.webp` for a photo and
+  the rack is 100% shop stock.
+- **Lookbook plates.** The three mannequin plates *are* generated for this build — no humans
+  anywhere, per the brief. The footer carries a short disclaimer.
 - **Categories.** The rack contains only shirts, shorts, jeans, track bottoms and caps.
 - **Placeholders.** Store address, phone number, drop dates and socials are illustrative —
   swap them in `src/data/site.ts`.

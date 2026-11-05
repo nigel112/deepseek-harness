@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import { ScrollTrigger } from '../lib/gsap'
-import { scrollToId } from '../lib/scroll'
-import { useCart } from '../lib/cart'
+import { ScrollTrigger } from '../core/gsap'
+import { scrollToId } from '../core/scroll'
+import { useCart } from '../core/cart'
 import { DROP } from '../data/site'
 
 const LINKS = [

@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { useScrollReveal } from '../lib/reveal'
+import { useScrollReveal } from '../core/reveal'
 import { LiquidWordmark } from '../components/LiquidFilters'
 
 const STATS = [

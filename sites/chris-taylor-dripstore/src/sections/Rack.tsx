@@ -1,44 +1,58 @@
 import { useEffect, useRef, useState } from 'react'
-import { gsap, ScrollTrigger, prefersReducedMotion } from '../lib/gsap'
+import { gsap, ScrollTrigger, prefersReducedMotion } from '../core/gsap'
 import { CATEGORIES, DROP, PRODUCTS, type Category, type Product } from '../data/site'
-import { useCart } from '../lib/cart'
-import { scrollToId } from '../lib/scroll'
+import { useCart } from '../core/cart'
+import { scrollToId } from '../core/scroll'
 
-function RackItem({ product, muted }: { product: Product; muted: boolean }) {
+/* Every piece hangs from the rail at an angle and turns to face you on hover. */
+function RackItem({ product, index, muted }: { product: Product; index: number; muted: boolean }) {
   const card = useRef<HTMLElement>(null)
+  const turn = useRef<HTMLDivElement>(null)
   const img = useRef<HTMLImageElement>(null)
   const quick = useRef<HTMLSpanElement>(null)
   const { add } = useCart()
 
+  /* Resting angle: the rack is seen slightly from the left, so each hanger sits askew. */
+  const rest = -(7 + (index % 3) * 6)
+
   useEffect(() => {
-    const el = card.current
-    const image = img.current
-    if (!el || !image || prefersReducedMotion()) return
+    const el = turn.current
+    const picture = img.current
+    if (!el || prefersReducedMotion()) return
 
-    const yTo = gsap.quickTo(el, 'y', { duration: 0.55, ease: 'power3.out' })
-    const rotTo = gsap.quickTo(el, 'rotation', { duration: 0.65, ease: 'power3.out' })
-    const imgTo = gsap.quickTo(image, 'scale', { duration: 0.8, ease: 'power3.out' })
+    const mm = gsap.matchMedia()
+    mm.add('(hover: hover) and (min-width: 981px)', () => {
+      gsap.set(el, { transformPerspective: 1400, transformOrigin: '50% -6px', rotationY: rest })
 
-    const enter = () => {
-      yTo(-16)
-      rotTo(-1.4)
-      imgTo(1.05)
-      if (quick.current) gsap.to(quick.current, { yPercent: 0, opacity: 1, duration: 0.45, ease: 'power3.out' })
-    }
-    const leave = () => {
-      yTo(0)
-      rotTo(0)
-      imgTo(1)
-      if (quick.current) gsap.to(quick.current, { yPercent: 110, opacity: 0, duration: 0.35, ease: 'power3.in' })
-    }
+      const rot = gsap.quickTo(el, 'rotationY', { duration: 0.95, ease: 'power3.out' })
+      const lift = gsap.quickTo(el, 'z', { duration: 0.8, ease: 'power3.out' })
+      const scale = picture ? gsap.quickTo(picture, 'scale', { duration: 0.9, ease: 'power3.out' }) : null
 
-    el.addEventListener('pointerenter', enter)
-    el.addEventListener('pointerleave', leave)
-    return () => {
-      el.removeEventListener('pointerenter', enter)
-      el.removeEventListener('pointerleave', leave)
-    }
-  }, [])
+      const enter = () => {
+        rot(0)
+        lift(46)
+        scale?.(1.03)
+        if (quick.current) gsap.to(quick.current, { yPercent: 0, opacity: 1, duration: 0.5, ease: 'power3.out' })
+      }
+      const leave = () => {
+        rot(rest)
+        lift(0)
+        scale?.(1)
+        if (quick.current) gsap.to(quick.current, { yPercent: 120, opacity: 0, duration: 0.4, ease: 'power3.in' })
+      }
+
+      el.addEventListener('pointerenter', enter)
+      el.addEventListener('pointerleave', leave)
+      return () => {
+        el.removeEventListener('pointerenter', enter)
+        el.removeEventListener('pointerleave', leave)
+        gsap.set(el, { clearProps: 'transform' })
+        if (picture) gsap.set(picture, { clearProps: 'transform' })
+      }
+    })
+
+    return () => mm.revert()
+  }, [rest])
 
   return (
     <article
@@ -47,25 +61,34 @@ function RackItem({ product, muted }: { product: Product; muted: boolean }) {
       data-code={product.code}
       data-cursor="ADD"
     >
-      <div className="rack-item__hanger" aria-hidden="true">
-        <svg viewBox="0 0 60 132" fill="none">
-          <path d="M30 132V30" stroke="currentColor" strokeWidth="1.2" />
-          <path d="M30 30c0-14 12-14 12-2 0 7-6 9-12 9" stroke="currentColor" strokeWidth="1.2" />
-          <circle cx="30" cy="31" r="2.6" fill="currentColor" />
-        </svg>
-      </div>
+      <div ref={turn} className="rack-item__turn">
+        <div className="rack-item__hanger" aria-hidden="true">
+          <svg viewBox="0 0 200 66" fill="none">
+            <path d="M100 46V20C100 9 114 9 114 19" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            <path d="M14 58 100 21 186 58" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
+            <path d="M14 58h172" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" />
+            <circle cx="100" cy="21" r="2.2" fill="currentColor" />
+          </svg>
+        </div>
 
-      <button
-        type="button"
-        className="rack-item__frame"
-        onClick={() => add(product.id)}
-        aria-label={`Add ${product.name} to bag, $${product.price}`}
-      >
-        <img ref={img} src={product.image} alt={`${product.name} — ${product.colorway} ${product.category.toLowerCase()} hanging on a wooden hanger`} loading="lazy" decoding="async" />
-        <span className="rack-item__quick">
-          <span ref={quick}>Add to bag</span>
-        </span>
-      </button>
+        <button
+          type="button"
+          className="rack-item__frame"
+          onClick={() => add(product.id)}
+          aria-label={`Add ${product.name} by ${product.brand} to bag, $${product.price}`}
+        >
+          <img
+            ref={img}
+            src={product.image}
+            alt={`${product.brand} ${product.name} — ${product.colorway} ${product.category.toLowerCase().replace(/s$/, '')} on a hanger`}
+            loading="lazy"
+            decoding="async"
+          />
+          <span className="rack-item__quick">
+            <span ref={quick}>Add to bag</span>
+          </span>
+        </button>
+      </div>
 
       <div className="rack-item__info">
         <div className="rack-item__row">
@@ -74,8 +97,8 @@ function RackItem({ product, muted }: { product: Product; muted: boolean }) {
         </div>
         <h3 className="rack-item__name">{product.name}</h3>
         <div className="rack-item__row rack-item__row--dim">
-          <span>{product.category}</span>
-          <span>{product.sizes[0]} — {product.sizes[product.sizes.length - 1]}</span>
+          <span>{product.brand}</span>
+          <span>{product.sizes[0]}{product.sizes.length > 1 ? ` — ${product.sizes[product.sizes.length - 1]}` : ''}</span>
         </div>
       </div>
     </article>
@@ -125,6 +148,31 @@ export function Rack() {
     return () => mm.revert()
   }, [])
 
+  /* Items swing up onto the rail as the section arrives. */
+  useEffect(() => {
+    const sectionEl = section.current
+    if (!sectionEl || prefersReducedMotion()) return
+
+    const mm = gsap.matchMedia()
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      const items = gsap.utils.toArray<HTMLElement>('.rack-item__turn', sectionEl)
+      const tween = gsap.from(items, {
+        yPercent: 12,
+        opacity: 0,
+        duration: 0.9,
+        ease: 'power3.out',
+        stagger: 0.055,
+        scrollTrigger: { trigger: sectionEl, start: 'top 78%', once: true },
+      })
+      return () => {
+        tween.scrollTrigger?.kill()
+        tween.kill()
+        gsap.set(items, { clearProps: 'opacity,transform' })
+      }
+    })
+    return () => mm.revert()
+  }, [])
+
   useEffect(() => {
     const id = window.setTimeout(() => ScrollTrigger.refresh(), 400)
     return () => window.clearTimeout(id)
@@ -145,8 +193,9 @@ export function Rack() {
 
           <div className="rack__head-right">
             <p className="rack__intro">
-              Shirts, shorts, jeans, track bottoms and caps. Hover to look closer — click to hang it in
-              your bag.
+              Shirts, shorts, jeans, track bottoms and caps — cut straight out of the shop floor.
+              They hang on the rail at an angle; hover and each piece turns to face you. Click to hang
+              it in your bag.
             </p>
             <div className="rack__filters" role="group" aria-label="Filter the rack">
               <button
@@ -176,13 +225,18 @@ export function Rack() {
         <div className="rack__viewport">
           <div className="rack__rail" aria-hidden="true">
             <span className="rack__rail-end" />
-            <span className="rack__rail-label mono">Rack 01 — Baines Avenue</span>
+            <span className="rack__rail-label mono">Rack 01 — Homegate Mall, shop 37</span>
           </div>
 
           <div className="rack__scroller">
             <div ref={track} className="rack__track">
-              {PRODUCTS.map((product) => (
-                <RackItem key={product.id} product={product} muted={active !== 'All' && product.category !== active} />
+              {PRODUCTS.map((product, i) => (
+                <RackItem
+                  key={product.id}
+                  product={product}
+                  index={i}
+                  muted={active !== 'All' && product.category !== active}
+                />
               ))}
 
               <div className="rack__end">

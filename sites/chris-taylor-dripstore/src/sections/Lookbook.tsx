@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
-import { gsap, prefersReducedMotion } from '../lib/gsap'
-import { useScrollReveal } from '../lib/reveal'
+import { gsap, prefersReducedMotion } from '../core/gsap'
+import { useScrollReveal } from '../core/reveal'
 import { LOOKS } from '../data/site'
 
 export function Lookbook() {

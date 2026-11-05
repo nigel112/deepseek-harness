@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
-import { gsap, ScrollTrigger, SplitText, prefersReducedMotion } from '../lib/gsap'
-import { scrollToId } from '../lib/scroll'
+import { gsap, ScrollTrigger, SplitText, prefersReducedMotion } from '../core/gsap'
+import { scrollToId } from '../core/scroll'
 import { SceneBoundary } from '../components/SceneBoundary'
 import { DROP } from '../data/site'
 

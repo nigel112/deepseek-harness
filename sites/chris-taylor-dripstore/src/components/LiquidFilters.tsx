@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { gsap, prefersReducedMotion } from '../lib/gsap'
+import { gsap, prefersReducedMotion } from '../core/gsap'
 
 /**
  * Shared liquid-glass filter bank.
