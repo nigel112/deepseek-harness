@@ -4,10 +4,10 @@ import { DROP } from '../data/site'
 import { useScrollReveal } from '../core/reveal'
 
 const RULES = [
-  'Forty-eight pieces across seven styles.',
-  'One piece per style, per customer — no bulk.',
-  'Harare same-day delivery before 15:00, regional 2–4 days.',
-  'Returns within 7 days, unworn, hanger tag attached.',
+  '48 pieces, 7 styles.',
+  'One per customer.',
+  'Harare same-day before 15:00.',
+  'Returns within 7 days, unworn.',
 ]
 
 export function Drop() {
@@ -31,8 +31,7 @@ export function Drop() {
             Drop {DROP.number} — {DROP.title}
           </h2>
           <p className="drop__lede">
-            The rail gets restocked every second Friday at 18:00 CAT. When it's gone, it's gone — the
-            next rack hangs in two weeks.
+            Restocked every second Friday, 18:00 CAT. When it's gone, it's gone.
           </p>
         </div>
 
@@ -54,8 +53,7 @@ export function Drop() {
               <span className="mono">The list</span>
               <h3>First look at the rail.</h3>
               <p>
-                One email per drop. The rack photographed on the morning it hangs, twenty minutes before
-                the store opens. Nothing else.
+                One email per drop, twenty minutes before the store opens.
               </p>
 
               {sent ? (

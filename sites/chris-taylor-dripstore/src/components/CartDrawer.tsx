@@ -31,7 +31,7 @@ export function CartDrawer() {
             <div className="cart__empty">
               <p className="cart__empty-title">Nothing hanging.</p>
               <p className="cart__empty-copy">
-                The rack is open — shirts, shorts, jeans, track bottoms and caps. Pick something worth the hanger.
+                Pick something worth the hanger.
               </p>
               <button className="btn btn--line" onClick={() => setOpen(false)}>
                 Back to the rack

@@ -117,10 +117,7 @@ export function Hero({ ready }: { ready: boolean }) {
         <div className="hero__bottom">
           <div className="hero__lede-wrap" data-hero-fade>
             <span className="hero__rule" />
-            <p className="hero__lede">
-              Shirts. Shorts. Jeans. Track bottoms. Caps. Seven pieces, hung on one rack, sold from one
-              room on Baines Avenue.
-            </p>
+            <p className="hero__lede">Seven pieces on one rack. Homegate Mall, Harare.</p>
             <p className="hero__sub">Nothing else earns the hanger.</p>
           </div>
 

@@ -56,8 +56,7 @@ export function Lookbook() {
           </h2>
         </div>
         <p className="look__intro">
-          Every look is shot on form — no faces, no filters. What you see is the drape, the drop and the
-          way the denim stacks. If it doesn't sit right on the mannequin, it won't sit right on you.
+          Shot on form — no faces, no filters.
         </p>
       </div>
 

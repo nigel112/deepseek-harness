@@ -117,7 +117,7 @@ export const LOOKS = [
     title: 'The Everyday',
     pieces: 'CT—001 Eagle Legend Tee · CT—002 Sunwash Cross Denim · CT—005 Chainlink Cap',
     image: '/img/opt/mann-01.webp',
-    note: 'Worn loose, dropped low, cap pulled to the brow.',
+    note: 'Worn loose, cap low.',
   },
   {
     id: 'look-02',
@@ -125,7 +125,7 @@ export const LOOKS = [
     title: 'The Soft Run',
     pieces: 'CT—003 Gore-Tex Track · CT—001 Eagle Legend Tee · CT—004 Amiri 22 Beanie',
     image: '/img/opt/mann-02.webp',
-    note: 'Sunday uniform. Nothing tight, nothing loud.',
+    note: 'Nothing tight, nothing loud.',
   },
   {
     id: 'look-03',
@@ -133,7 +133,7 @@ export const LOOKS = [
     title: 'The Heat Cut',
     pieces: 'CT—007 Raw Cut Denim Short · CT—001 Eagle Legend Tee · CT—005 Chainlink Cap',
     image: '/img/opt/mann-03.webp',
-    note: 'Built for a Harare October. Cut above the knee.',
+    note: 'Cut above the knee.',
   },
 ]
 

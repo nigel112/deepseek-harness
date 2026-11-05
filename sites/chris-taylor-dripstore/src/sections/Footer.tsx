@@ -28,7 +28,7 @@ export function Footer() {
             </address>
             <a
               className="store__link"
-              href="https://maps.google.com/?q=Baines+Avenue+Harare"
+              href="https://maps.google.com/?q=Homegate+Mall+Harare"
               target="_blank"
               rel="noreferrer"
               data-cursor="MAP"
@@ -69,7 +69,7 @@ export function Footer() {
               {['#rack', '#lookbook', '#glass', '#drop'].map((id, i) => (
                 <li key={id}>
                   <button onClick={() => scrollToId(id)}>
-                    {['Shirts · shorts · jeans · track · caps', 'Lookbook', 'Material study', 'The drop'][i]}
+                    {['The rack', 'Lookbook', 'Material study', 'The drop'][i]}
                   </button>
                 </li>
               ))}
@@ -85,7 +85,7 @@ export function Footer() {
       <div className="shell store__bottom">
         <span className="mono">© 2026 Chris Taylor Dripstore — Harare, Zimbabwe</span>
         <span className="mono store__credits">
-          Built with Three.js · React Three Fiber · GSAP ScrollTrigger · Lenis · liquid glass shaders
+          Three.js · React Three Fiber · GSAP · Lenis
         </span>
         <button className="store__top-btn mono" onClick={() => scrollToId('#top')} data-cursor="TOP">
           Back to top ↑
@@ -93,8 +93,7 @@ export function Footer() {
       </div>
 
       <p className="shell store__disclaimer mono">
-        Concept storefront. Product and mannequin imagery was generated for this build; all pieces,
-        prices and figures are illustrative.
+        Concept storefront. All prices and figures illustrative.
       </p>
     </footer>
   )

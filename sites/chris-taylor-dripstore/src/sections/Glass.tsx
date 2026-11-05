@@ -8,19 +8,19 @@ const SPECS = [
     key: 'Refraction',
     value: '1.52',
     unit: 'IOR',
-    copy: 'Casts the room behind it — the rail, the paper backdrop, you — a few degrees off true.',
+    copy: 'Bends the room a few degrees off true.',
   },
   {
     key: 'Chromatics',
     value: '0.18',
     unit: 'CA',
-    copy: 'A whisper of colour split at the rim, the way real glass holds a Harare afternoon.',
+    copy: 'Colour splits at the rim.',
   },
   {
     key: 'Surface',
     value: '0.02',
     unit: 'ROUGH',
-    copy: 'Polished, not plastic. Sharp highlights that slide across the bevel as you move.',
+    copy: 'Polished, not plastic.',
   },
 ]
 
@@ -89,13 +89,11 @@ export function Glass() {
         <div>
           <span className="mono section-index">04 / Material study</span>
           <h2 ref={heading} className="glass__title">
-            Liquid glass, poured in <em>Harare</em>.
+            Liquid <em>glass</em>.
           </h2>
         </div>
         <p className="glass__intro">
-          The drop cards, the rail tags and the store signage are cast in liquid glass — a refractive
-          chrome finish built in the browser with Three.js and React Three Fiber. It bends light the way
-          the pieces bend a silhouette.
+          Chrome, cast in the browser. Real-time refraction.
         </p>
       </div>
 
@@ -116,8 +114,7 @@ export function Glass() {
         <div className="glass__panel">
           <LiquidWordmark text="LIQUID GLASS" className="liquid-wordmark--panel" intensity={7} />
           <p className="glass__panel-copy">
-            Rendered with a distorted chrome mesh and a transmissive glass shader. No flat PNGs — the
-            material is alive, and it reacts to the pointer, the scroll and the light in the room.
+            A distorted chrome mesh with a transmissive shader. It reacts to the pointer and the light.
           </p>
 
           <div className="glass__cards">

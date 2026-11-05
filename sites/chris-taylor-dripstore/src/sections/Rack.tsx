@@ -193,9 +193,7 @@ export function Rack() {
 
           <div className="rack__head-right">
             <p className="rack__intro">
-              Shirts, shorts, jeans, track bottoms and caps — cut straight out of the shop floor.
-              They hang on the rail at an angle; hover and each piece turns to face you. Click to hang
-              it in your bag.
+              Hover a piece and it turns to face you. Click to add it.
             </p>
             <div className="rack__filters" role="group" aria-label="Filter the rack">
               <button
@@ -244,7 +242,7 @@ export function Rack() {
                 <h3>
                   The rest of Drop {DROP.number} hangs {DROP.label.split(' — ')[0]}
                 </h3>
-                <p>Forty-eight pieces. Seven styles. One per customer.</p>
+                <p>48 pieces. One per customer.</p>
                 <button className="btn btn--line btn--dark" onClick={() => scrollToId('#drop')} data-cursor="DROP">
                   Get on the drop list
                 </button>
@@ -254,7 +252,7 @@ export function Rack() {
         </div>
 
         <footer className="rack__foot shell">
-          <span className="mono">The rail runs sideways — keep scrolling</span>
+          <span className="mono">Sideways rail</span>
           <span className="mono rack__foot-note">
             Showing {String(visible.length).padStart(2, '0')} of {String(PRODUCTS.length).padStart(2, '0')}
           </span>
